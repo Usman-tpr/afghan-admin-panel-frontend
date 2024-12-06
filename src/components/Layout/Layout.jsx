@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Outlet } from "react-router-dom";  // To render child routes (Dashboard, ManageVisits, etc.)
+import { Outlet } from "react-router-dom";
+import { FaTachometerAlt, FaUsers, FaCalendarAlt, FaSignOutAlt, FaUser } from "react-icons/fa"; // Importing icons
 
 const AdminLayout = () => {
   return (
@@ -13,29 +14,48 @@ const AdminLayout = () => {
         <nav>
           <ul className="space-y-4 p-4">
             <li>
-              <Link to="/admin/dashboard" className="hover:text-yellow-500">
-                Dashboard
+              <Link to="/admin/dashboard" className="flex items-center hover:text-yellow-500">
+                <FaTachometerAlt className="mr-2" /> Dashboard
               </Link>
             </li>
             <li>
-              <Link to="/admin/manage-visits" className="hover:text-yellow-500">
-                Manage Visits
+              <Link to="/admin/manage-visits" className="flex items-center hover:text-yellow-500">
+                <FaUsers className="mr-2" /> Manage Visits
               </Link>
             </li>
             <li>
-              <Link to="/admin/manage-events" className="hover:text-yellow-500">
-                Manage Events
+              <Link to="/admin/manage-events" className="flex items-center hover:text-yellow-500">
+                <FaCalendarAlt className="mr-2" /> Manage Events
               </Link>
             </li>
-            {/* Add more navigation links here */}
+            <li>
+              <Link to="/admin" className="flex items-center hover:text-yellow-500">
+                <FaCalendarAlt className="mr-2" /> Manage Gallary
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 w-full p-6 bg-gray-100 ml-64">
+      <div className="flex-1 w-full bg-gray-100 ml-64">
+        {/* Navbar */}
+        <div className="bg-white shadow-md p-4 flex justify-between items-center">
+          <h1 className="text-xl font-bold text-gray-800">Afghan Invest</h1>
+          <div className="flex space-x-4 items-center">
+            <Link to="/admin/profile" className="flex items-center text-gray-600 hover:text-yellow-500">
+              <FaUser className="mr-2" /> Profile
+            </Link>
+            <Link to="/logout" className="flex items-center text-gray-600 hover:text-yellow-500">
+              <FaSignOutAlt className="mr-2" /> Logout
+            </Link>
+          </div>
+        </div>
+
         {/* Render the nested route content here */}
-        <Outlet />
+        <div className="p-6">
+          <Outlet />
+        </div>
       </div>
     </div>
   );
