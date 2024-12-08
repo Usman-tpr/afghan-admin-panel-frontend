@@ -4,7 +4,7 @@ import axios from "axios";
 const token = localStorage.getItem("AdminInfo");
 
 const api = axios.create({
-  baseURL: "http://localhost:8080/api/",  // Your backend API URL
+  baseURL: "https://api.afghan.ayancurtains.com/api/",  // Your backend API URL
   headers: {
     "Content-Type": "application/json",
     "Authorization":`Bearer ${token}`
