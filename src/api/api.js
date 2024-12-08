@@ -1,29 +1,30 @@
 import axios from "axios";
 
 // Create an axios instance with default settings
+const token = localStorage.getItem("AdminInfo");
+
 const api = axios.create({
-  baseURL: "http://localhost:5000/api/",  // Your backend API URL
+  baseURL: "http://localhost:8080/api/",  // Your backend API URL
   headers: {
     "Content-Type": "application/json",
+    "Authorization":`Bearer ${token}`
   },
 });
 
 // Set Authorization token for protected routes if available
-const token = localStorage.getItem("token");
-if (token) {
-  api.defaults.headers["Authorization"] = `Bearer ${token}`;
-}
+
 
 // General GET request
 export const getData = async (endpoint) => {
   try {
     const response = await api.get(endpoint);
-    return response.data;  // Return the response data
+    return response.data;
   } catch (error) {
-    console.error("Error getting data", error);
+    console.error("Error getting data:", error.response || error.message);
     throw error;
   }
 };
+
 
 // General POST request
 export const postData = async (endpoint, data , headers) => {

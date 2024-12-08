@@ -1,31 +1,48 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes , Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate, Outlet } from "react-router-dom";
 import Login from "./pages/Login";
 import AdminLayout from "./components/Layout/Layout";
 import DashboardPage from "./pages/DashboardPage";
 import VisitorPage from "./pages/VsitorPage";
 import EventPage from "./pages/EventPage";
+import CreateMembers from "./pages/CreateMembers";
 
-// Create a Protected Route to check for JWT token
-const ProtectedRoute = ({ element }) => {
-  const token = localStorage.getItem("token");
-  console.log(token)
-  return token ? element : <Navigate to="/login" />;  // Use Navigate instead of Redirect
+// ProtectedRoute Component
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem("AdminInfo");
+  return token ? children : <Navigate to="/login" />;
+};
+
+// CheckingAdmin Component
+const CheckingAdmin = () => {
+  const token = localStorage.getItem("AdminInfo");
+  return token ? <Navigate to="/admin/dashboard" /> : <Login />;
 };
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        {/* Public Routes */}
-        <Route path="/login" element={<Login />} />
+        {/* Public Route */}
+        <Route path="/login" element={<CheckingAdmin />} />
 
         {/* Protected Admin Routes */}
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route path="dashboard" element={<ProtectedRoute element={<DashboardPage />} />} />
-          <Route path="manage-visits" element={<ProtectedRoute element={<VisitorPage />} />} />
-          <Route path="manage-events" element={<ProtectedRoute element={<EventPage />} />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="dashboard" element={<DashboardPage />} />
+          <Route path="manage-visits" element={<VisitorPage />} />
+          <Route path="manage-events" element={<EventPage />} />
+          <Route path="manage-members" element={<CreateMembers />} />
         </Route>
+
+        {/* Redirect to Login for unmatched routes */}
+        <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </Router>
   );

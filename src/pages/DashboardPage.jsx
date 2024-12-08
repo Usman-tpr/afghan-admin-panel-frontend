@@ -14,15 +14,15 @@ const DashboardPage = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const visitResponse = await getData("/visits"); // Fetch visits data
-        const eventResponse = await getData("/events"); // Fetch events data
-        const recentVisitorsResponse = await getData("/visitors/recent"); // Recent visitors
-        const recentEventsResponse = await getData("/events/recent"); // Recent events
+        // const visitResponse = await getData("/visits"); // Fetch visits data
+        // const eventResponse = await getData("/events"); // Fetch events data
+        // const recentVisitorsResponse = await getData("/visitors/recent"); // Recent visitors
+        // const recentEventsResponse = await getData("/events/recent"); // Recent events
 
-        setVisitCount(visitResponse.length);
-        setEventCount(eventResponse.length);
-        setRecentVisitors(recentVisitorsResponse);
-        setRecentEvents(recentEventsResponse);
+        // setVisitCount(visitResponse.length);
+        // setEventCount(eventResponse.length);
+        // setRecentVisitors(recentVisitorsResponse);
+        // setRecentEvents(recentEventsResponse);
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
       }
@@ -76,9 +76,21 @@ const DashboardPage = () => {
           </div>
         </Link>
         <div className="dashboard-card">
-          <div className="p-4 bg-yellow-500 text-white rounded-md shadow-md">
+          <div className="p-4 bg-gray-800 text-white rounded-md shadow-md">
             <h2 className="text-lg font-semibold">New Sign-ups</h2>
-            <p className="text-3xl font-bold">32</p> {/* Placeholder */}
+            <p className="text-3xl font-bold">4</p> {/* Placeholder */}
+          </div>
+        </div>
+        <div className="dashboard-card">
+          <div className="p-4 bg-yellow-500 text-white rounded-md shadow-md">
+            <h2 className="text-lg font-semibold">Total Admin Memembers</h2>
+            <p className="text-3xl font-bold">0</p> {/* Placeholder */}
+          </div>
+        </div>
+        <div className="dashboard-card">
+          <div className="p-4 bg-red-950 text-white rounded-md shadow-md">
+            <h2 className="text-lg font-semibold">Total Admin Memembers</h2>
+            <p className="text-3xl font-bold">0</p> {/* Placeholder */}
           </div>
         </div>
       </div>

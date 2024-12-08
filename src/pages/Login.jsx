@@ -12,11 +12,11 @@ const Login = () => {
     e.preventDefault();
     try {
       const data = { email, password };
-      const response = await postData("/auth/login", data); // Send POST request to login
-
+      const response = await postData("/user", data); // Send POST request to login
+      console.log(response)
       // If login is successful, store the token in localStorage and redirect
-      if (response.token) {
-        localStorage.setItem("token", response.token);  // Save JWT token in localStorage
+      if (response.data.token) {
+        localStorage.setItem("AdminInfo", response.data.token);  // Save JWT token in localStorage
         navigate("/admin/dashboard");  // Redirect to the dashboard
       }
     } catch (error) {
@@ -47,7 +47,7 @@ const Login = () => {
               required
             />
           </div>
-          
+
           <div>
             <label htmlFor="password" className="block text-sm font-medium text-gray-700">
               Password
