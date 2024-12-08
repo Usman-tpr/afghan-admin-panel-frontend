@@ -139,7 +139,7 @@ const EventPage = () => {
             className="bg-gray-800 rounded-lg shadow-md p-4 flex flex-col items-center"
           >
             <img
-              src={`http://localhost:8080/${event.image}`}
+              src={`https://api.afghan.ayancurtains.com/${event.image}`}
               alt={event.title_english}
               className="w-full h-32 object-cover rounded-md mb-2"
             />
