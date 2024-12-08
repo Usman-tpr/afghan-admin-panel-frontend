@@ -27,7 +27,7 @@ const EventPage = () => {
 
   const fetchEvents = async () => {
     try {
-      const response = await getData("event/"); // Assuming endpoint is 'event/'
+      const response = await getData("visit/"); // Assuming endpoint is 'event/'
       setEvents(response.data);
     } catch (error) {
       console.error("Error fetching events:", error);
